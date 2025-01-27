@@ -5,6 +5,13 @@
 	--color-paragraph: #999;
 	--color-black: #000;
 	--color-white: #fff;
+	--color-gold: #bfa403;
+	--color-badge: #faf9f2;
+	--color-gray: #cecece;
+	--color-red: #e60045;
+	--color-red-darken: #c62f45;
+	--color-button: #777777;
+	--color-button-darken: #666;
 	--font-weigh--light: 300;
 	--font-weigh--regular: 400;
 	--font-weigh--semibold: 600;
@@ -171,10 +178,82 @@ p {
 .theme-list__author {
 	margin: 0 0 16px 0;
 	font-weight: var(--font-weigh--semibold);
+	text-transform: lowercase;
 }
 
 .theme-list__author-by {
 	font-weight: var(--font-weigh--light);
+}
+
+.theme-list__top-rated {
+	display: none;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 8px;
+	background-color: var(--color-gold);
+	color: var(--color-badge);
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/* Media query to show the "Top Rated" banner on larger screens */
+@media (min-width: 992px) {
+	.theme-list__top-rated {
+		display: block;
+	}
+}
+
+.theme-list__rating {
+	display: flex;
+	justify-content: space-between;
+	margin-top: auto;
+}
+
+.theme-list__rating-star {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	fill: var(--color-gray);
+	vertical-align: middle;
+}
+
+.theme-list__rating-star--fill {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	fill: var(--color-gold);
+	vertical-align: middle;
+}
+
+.theme-list__remove-icon {
+	width: 14px;
+	height: 14px;
+	fill: var(--color-red);
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.theme-list__remove-icon:hover {
+	fill: var(--color-red-darken);
+}
+
+.theme-list__btn-remove {
+	color: var(--color-button);
+	background-color: transparent;
+	border: 0;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.theme-list__btn-remove:hover {
+	color: var(--color-button-darken);
+}
+
+.theme-list__btn-remove span {
+	vertical-align: middle;
+	margin-right: 2px;
 }
 
 .error-message {
