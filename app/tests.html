@@ -1,17 +1,200 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <title>Test Runner</title>
-  </head>
-  <body>
-    <script src='script.js'></script>
-    <script src="https://unpkg.com/expect@1/umd/expect.min.js"></script>
-    <script>
-      // Tests
-      // Failing tests can be seen in your browser console
-      // See the expect 1.x documentation here: https://github.com/mjackson/expect#expect1x-documentation
-      expect(false).toBe(true)
-    </script>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Test Runner</title>
+		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<header>
+			<h1 class="theme-header" title="Themes">Themes</h1>
+		</header>
+		<main class="theme-main">
+			<div id="theme-loading" aria-label="loading icon" class="theme-loading">
+				Loading items...
+			</div>
+			<section id="theme-container" class="theme-container">
+				<ul id="theme-list" class="theme-list"></ul>
+				<p id="error-message" class="error-message">Error loading items.</p>
+				<p id="no-items-message" class="no-items-message">
+					No items to remove.
+				</p>
+			</section>
+		</main>
+		<script src="js/script.js"></script>
+		<script src="https://unpkg.com/expect@1/umd/expect.min.js"></script>
+		<script>
+			// Tests
+			// Failing tests can be seen in your browser console
+			// See the expect 1.x documentation here: https://github.com/mjackson/expect#expect1x-documentation
+
+			// Mock data for testing
+			const mockData = {
+				items: [
+					{
+						id: '1',
+						title: 'Theme 1',
+						url: 'https://test.net/search/ocean',
+						author: 'Author 1',
+						rating: '5',
+						cover_image: [
+							{
+								url: 'https://placehold.co/200x107/492a69/664c80',
+								width: '200',
+							},
+							{
+								url: 'https://placehold.co/300x161/492a69/664c80',
+								width: '300',
+							},
+						],
+					},
+					{
+						id: '2',
+						title: 'Theme 2',
+						author: 'Author 2',
+						rating: '4',
+						cover_image: [
+							{
+								url: 'https://placehold.co/200x107/492a69/664c80',
+								width: '200',
+							},
+							{
+								url: 'https://placehold.co/300x161/492a69/664c80',
+								width: '300',
+							},
+						],
+					},
+				],
+			};
+
+			//Function to simulate a successful fetch response
+			const mockFetchSuccess = () =>
+				Promise.resolve({
+					ok: true,
+					json: () => Promise.resolve(mockData),
+				});
+
+			// Function to simulate a failed fetch response
+			const mockFetchFailure = () =>
+				Promise.resolve({
+					ok: false,
+					json: () => Promise.reject(new Error('Failed to load data')),
+				});
+
+			// Test if loading indicator is displayed initially
+			const loadingIndicator = document.getElementById('theme-loading');
+			expect(loadingIndicator.style.display).toNotBe('none');
+
+			// Spy on window.fetch and mock the response with mockFetchSuccess
+			const fetchSpy = expect
+				.spyOn(window, 'fetch')
+				.andReturn(mockFetchSuccess());
+
+			// Function to run test cases
+			const runTests = async () => {
+				// Test if items are fetched and rendered correctly
+				let itemList = document.getElementById('theme-list');
+				// Simulate rendering delay for async testing
+				await new Promise(resolve => setTimeout(resolve, 1000));
+				// Test if loading indicator is hidden after data is fetched
+				expect(loadingIndicator.style.display).toBe('none');
+				console.log('Test: Loading indicator is hidden after data is fetched');
+
+				expect(itemList.children.length).toBe(mockData.items.length);
+				expect(
+					itemList.children[0].querySelector('.theme-list__title').textContent
+				).toBe(mockData.items[0].title);
+				expect(
+					itemList.children[1].querySelector('.theme-list__title').textContent
+				).toBe(mockData.items[1].title);
+				console.log('Test: Items are fetched and rendered correctly');
+
+				mockData.items.forEach((item, index) => {
+					const starIcons = itemList.children[index].querySelectorAll(
+						'.theme-list__rating-star, .theme-list__rating-star--fill'
+					);
+					const filledStars = itemList.children[index].querySelectorAll(
+						'.theme-list__rating-star--fill'
+					);
+					const unfilledStars = itemList.children[index].querySelectorAll(
+						'.theme-list__rating-star'
+					);
+					expect(starIcons.length).toBe(5);
+					expect(filledStars.length).toBe(Math.floor(item.rating));
+					expect(unfilledStars.length).toBe(5 - Math.floor(item.rating));
+				});
+				console.log('Test: Stars are displayed properly');
+
+				mockData.items.forEach((item, index) => {
+					const topRatedBadge = itemList.children[index].querySelector(
+						'.theme-list__top-rated'
+					);
+					if (Math.floor(item.rating) === 5) {
+						expect(topRatedBadge).toNotBe(null);
+						const isLargeScreen =
+							window.matchMedia('(min-width: 992px)').matches;
+						if (isLargeScreen) {
+							expect(topRatedBadge.style.display).toNotBe('none');
+						} else {
+							expect(topRatedBadge.style.display).toNotExist();
+						}
+					} else {
+						expect(topRatedBadge).toBe(null);
+					}
+				});
+				console.log(
+					'Test: "Top Rated" badge is displayed correctly on large screen devices'
+				);
+
+				const initialItemCount =
+					document.getElementById('theme-list').children.length;
+				const removeButton = document.querySelector('.theme-list__btn-remove');
+				removeButton.click();
+				itemList = document.getElementById('theme-list');
+				expect(itemList.children.length).toBe(initialItemCount - 1);
+				console.log('Test: Item is removed correctly');
+
+				const removeButtons = document.querySelectorAll(
+					'.theme-list__btn-remove'
+				);
+				removeButtons.forEach(button => button.click());
+				const noItemsMessage = document.getElementById('no-items-message');
+				expect(noItemsMessage.style.display).toBe('block');
+				expect(noItemsMessage.innerText).toBe('No items to remove.');
+				console.log(
+					'Test: "No items found" message is displayed when all items are removed'
+				);
+
+				// Restore the original fetch
+				fetchSpy.restore();
+			};
+
+			// Note: Failure scenario to be executed separately
+			// Function to test the failure case for the fetch API
+			// Spy on window.fetch and mock the failure response
+			/* const fetchFailSpy = expect
+				.spyOn(window, 'fetch')
+				.andReturn(mockFetchFailure());
+
+			const runFailureTest = async () => {
+				// Simulate the error handling (mock error in the DOM)
+				const errorMessage = document.getElementById('error-message');
+				await new Promise(resolve => setTimeout(resolve, 1000));
+				expect(errorMessage.style.display).toBe('block');
+				expect(errorMessage.innerText).toBe('Error loading items.');
+				console.log('Test: Error message is displayed when the API fails');
+
+				// Restore the original fetch
+				fetchFailSpy.restore();
+			}; */
+
+			// Run the tests after the DOM content is loaded
+			document.addEventListener('DOMContentLoaded', async () => {
+				await runTests(); // Test for success case
+				//await runFailureTest(); // Test for failure case
+			});
+		</script>
+	</body>
 </html>
