@@ -5,6 +5,10 @@
 	--color-paragraph: #999;
 	--color-black: #000;
 	--color-white: #fff;
+	--font-weigh--light: 300;
+	--font-weigh--regular: 400;
+	--font-weigh--semibold: 600;
+	--font-weigh--bold: 700;
 }
 
 *,
@@ -71,4 +75,111 @@ p {
 	background-color: var(--color-container);
 	border-radius: 16px;
 	margin: 16px;
+}
+
+/* Responsive layout */
+.theme-container {
+	background-color: var(--color-container);
+	border-radius: 16px;
+	margin: 16px;
+}
+
+@media screen and (min-width: 600px) {
+	.theme-container {
+		margin: 16px;
+		padding: 8px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.theme-container {
+		padding: 16px;
+		margin: 32px 16px;
+	}
+}
+
+/* Mobile first */
+.theme-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	overflow: hidden;
+	gap: 8px;
+	list-style: none;
+	padding: 8px;
+}
+
+/* small devices (landscape phones, 600px and up) */
+@media screen and (min-width: 600px) {
+	.theme-list {
+		padding: 0px;
+		margin: 8px;
+	}
+}
+/* medium devices (desktops 992px and up) */
+@media screen and (min-width: 992px) {
+	.theme-list {
+		gap: 16px;
+		padding: 0px;
+		margin: 16px;
+	}
+}
+
+.theme-list__item {
+	background-color: var(--color-white);
+	border-radius: 16px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin: 4px;
+	padding: 16px;
+	transition: transform 0.2s;
+	flex-basis: 100%;
+}
+
+/* small devices (landscape phones, 600px and up) */
+@media screen and (min-width: 600px) {
+	.theme-list__item {
+		flex-basis: 46%;
+	}
+}
+
+/* medium devices (desktops 992px and up) */
+@media screen and (min-width: 992px) {
+	.theme-list__item {
+		flex-basis: 30%;
+	}
+}
+
+.theme-list__details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	height: 100%;
+}
+
+.theme-list__image {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.theme-list__title {
+	margin: 0 0 2px 0;
+	font-weight: var(--font-weigh--bold);
+}
+
+.theme-list__author {
+	margin: 0 0 16px 0;
+	font-weight: var(--font-weigh--semibold);
+}
+
+.theme-list__author-by {
+	font-weight: var(--font-weigh--light);
+}
+
+.error-message {
+	display: none;
+	text-align: center;
+	font-size: 16px;
+	color: var(--color-black);
 }
