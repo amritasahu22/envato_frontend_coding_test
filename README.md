@@ -1,3 +1,45 @@
+### Project Structure
+
+The project is organized as follows:
+app/
+|_ index.html // Main HTML file
+|_ css/ // CSS file for styling
+|_ js/ // JavaScript logic
+|_ _assets/ // Contains image assets
+|_ tests.html // For testing Javascript logic
+
+### Please indicate how you might handle other/older browsers using inline comments.
+
+Below are strategies I would use to handle cross-browser compatibility:
+
+- HTML: Using conditional comments for IE 9 and below.
+- CSS Browser-specific prefixes & fallbacks for flexbox and media queries.
+- JavaScript: Feature Detection using modernizr library can be used to check if a feature is supported or Browser-Specific workarounds with comments.
+- Polyfills are scripts that "fill in" functionality missing in older browsers. You can conditionally include polyfills based on whether the browser supports the feature you're targeting.
+- For older browsers, might need to include polyfills for Element.closest, Array.prototype.fill, fetch and Promise.
+
+### Please add comments explaining how your solution might differ in a production environment.
+
+In a production environment, the code would need to be optimized for performance, security and maintainability. Following improvments can be made for a production-ready version:
+
+- Environment Variables - Use env variables to manage different configurations for development and production environments (API URL).
+- Minification, Bundling and Code Splitting: Use tools like Webpack to bundle and minify JS and CSS files to reduce file size and improve load times.
+- Improve Error handling and logging to capture and report errors.
+- CI/CD (Continuous Integration/Continuous Deployment) : Automate the deployment pipeline with CI/CD tools (eg bamboo, github CI) to streamline the process of building, testing and deploying the application.
+- Caching to reduce the number of network requests and improve performance.
+- Serve static assets from a CDN (Content Delivery Network) for faster global delivery.
+- Security best practices to protect against XSS and other attacks.
+
+### Testing
+
+All tests are added in the tests.html file.
+
+### Improvements
+
+- Introduce dropdown to sort Author, Title alphabetically, new theme arrivals, rating
+- Introduce pagination for handling large datasets
+- Improve test coverage and styling
+
 # Envato Front End Coding Test
 
 Make sure you read **all** of this document carefully, and follow the guidelines in it. Pay particular attention to the "What We Care About" section.

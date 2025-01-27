@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -19,8 +19,20 @@
 			</div>
 			<section id="theme-container" class="theme-container">
 				<ul id="theme-list" class="theme-list"></ul>
-				<p id="error-message" class="error-message">Error loading items.</p>
-				<p id="no-items-message" class="no-items-message">
+				<p
+					id="error-message"
+					class="error-message"
+					role="alert"
+					aria-label="Error loading items"
+				>
+					Error loading items.
+				</p>
+				<p
+					id="no-items-message"
+					class="no-items-message"
+					role="alert"
+					aria-label="No items to remove"
+				>
 					No items to remove.
 				</p>
 			</section>
