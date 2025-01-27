@@ -9,7 +9,7 @@ The project is organized as follows:
 ├── tests.html       # Test cases for testing JavaScript
 ├── css/style.css    # CSS file for styling and layout
 ├── js/script.js     # JavaScript logic
-\_assets/            # Contains provided image assets
+├── _assets/            # Contains provided image assets
 ```
 
 ## Please indicate how you might handle other/older browsers using inline comments.
