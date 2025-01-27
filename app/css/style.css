@@ -57,7 +57,6 @@ h3 {
 
 p {
 	font-size: 12px;
-	margin-top: 0;
 	color: var(--color-paragraph);
 }
 
@@ -75,7 +74,7 @@ p {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	font-size: 16px;
+	font-size: 20px;
 }
 
 /* Responsive layout */
@@ -151,7 +150,7 @@ p {
 }
 
 .theme-list__item:hover {
-	transform: translateY(-5px);
+	transform: translateY(-8px);
 }
 
 .theme-list__details {
@@ -256,15 +255,14 @@ p {
 
 .error-message {
 	display: none;
-	text-align: center;
 	font-size: 16px;
 	color: var(--color-black);
+	text-align: center;
 }
 
 .no-items-message {
 	display: none;
-	text-align: center;
 	font-size: 16px;
 	color: var(--color-black);
-	margin-bottom: 40px;
+	text-align: center;
 }

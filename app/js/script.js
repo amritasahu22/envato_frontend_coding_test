@@ -61,6 +61,7 @@ const createItemHTML = item => {
         ${coverImageSources}
         <img src="${item.cover_image[0].url}" 
           width="${item.cover_image[0].width}"
+					height="107px"
           class="theme-list__image" 
           alt="${item.title} cover image" />
       </picture>

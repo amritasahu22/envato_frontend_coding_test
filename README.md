@@ -39,6 +39,7 @@ In a production environment, the code would need to be optimized for performance
 - Introduce dropdown to sort Author, Title alphabetically, new theme arrivals, rating
 - Introduce pagination for handling large datasets
 - Improve test coverage and styling
+- Show spinner while loading items
 
 # Envato Front End Coding Test
 

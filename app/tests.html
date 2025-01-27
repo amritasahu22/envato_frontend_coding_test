@@ -17,13 +17,15 @@
 			</div>
 			<section id="theme-container" class="theme-container">
 				<ul id="theme-list" class="theme-list"></ul>
-				<p id="error-message" class="error-message">Error loading items.</p>
+				<p id="error-message" class="error-message">
+					Unable to load items. Please refresh and try again later.
+				</p>
 				<p id="no-items-message" class="no-items-message">
-					No items to remove.
+					No items available to remove.
 				</p>
 			</section>
 		</main>
-		<script src="js/script.js"></script>
+		<script src="js/script.js" defer></script>
 		<script src="https://unpkg.com/expect@1/umd/expect.min.js"></script>
 		<script>
 			// Tests
@@ -162,7 +164,7 @@
 				removeButtons.forEach(button => button.click());
 				const noItemsMessage = document.getElementById('no-items-message');
 				expect(noItemsMessage.style.display).toBe('block');
-				expect(noItemsMessage.innerText).toBe('No items to remove.');
+				expect(noItemsMessage.innerText).toBe('No items available to remove.');
 				console.log(
 					'Test: "No items found" message is displayed when all items are removed'
 				);
@@ -183,12 +185,15 @@
 				const errorMessage = document.getElementById('error-message');
 				await new Promise(resolve => setTimeout(resolve, 1000));
 				expect(errorMessage.style.display).toBe('block');
-				expect(errorMessage.innerText).toBe('Error loading items.');
+				expect(errorMessage.innerText).toBe(
+					'Unable to load items. Please refresh and try again later.'
+				);
 				console.log('Test: Error message is displayed when the API fails');
 
 				// Restore the original fetch
 				fetchFailSpy.restore();
-			}; */
+			}; 
+			*/
 
 			// Run the tests after the DOM content is loaded
 			document.addEventListener('DOMContentLoaded', async () => {
