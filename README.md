@@ -1,14 +1,18 @@
-### Project Structure
+# Envato Front End Coding Test
+
+## Project Structure
 
 The project is organized as follows:
-app/
-|_ index.html // Main HTML file
-|_ css/ // CSS file for styling
-|_ js/ // JavaScript logic
-|_ _assets/ // Contains image assets
-|_ tests.html // For testing Javascript logic
 
-### Please indicate how you might handle other/older browsers using inline comments.
+```app/
+├── index.html       # Main HTML file
+├── tests.html       # Test cases for testing JavaScript
+├── css/style.css    # CSS file for styling and layout
+├── js/script.js     # JavaScript logic
+\_assets/            # Contains provided image assets
+```
+
+## Please indicate how you might handle other/older browsers using inline comments.
 
 Below are strategies I would use to handle cross-browser compatibility:
 
@@ -18,7 +22,7 @@ Below are strategies I would use to handle cross-browser compatibility:
 - Polyfills are scripts that "fill in" functionality missing in older browsers. You can conditionally include polyfills based on whether the browser supports the feature you're targeting.
 - For older browsers, might need to include polyfills for Element.closest, Array.prototype.fill, fetch and Promise.
 
-### Please add comments explaining how your solution might differ in a production environment.
+## Please add comments explaining how your solution might differ in a production environment.
 
 In a production environment, the code would need to be optimized for performance, security and maintainability. Following improvments can be made for a production-ready version:
 
@@ -30,11 +34,7 @@ In a production environment, the code would need to be optimized for performance
 - Serve static assets from a CDN (Content Delivery Network) for faster global delivery.
 - Security best practices to protect against XSS and other attacks.
 
-### Testing
-
-All tests are added in the tests.html file.
-
-### Improvements
+## Improvements
 
 - Introduce dropdown to sort Author, Title alphabetically, new theme arrivals, rating
 - Introduce pagination for handling large datasets
