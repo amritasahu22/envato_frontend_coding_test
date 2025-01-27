@@ -5,7 +5,7 @@
 	--color-paragraph: #999;
 	--color-black: #000;
 	--color-white: #fff;
-	--color-gold: #bfa403;
+	--color-yellow: #bfa403;
 	--color-badge: #faf9f2;
 	--color-gray: #cecece;
 	--color-red: #e60045;
@@ -156,6 +156,10 @@ p {
 	}
 }
 
+.theme-list__item:hover {
+	transform: translateY(-5px);
+}
+
 .theme-list__details {
 	display: flex;
 	flex-direction: column;
@@ -191,7 +195,7 @@ p {
 	top: 0px;
 	right: 0px;
 	padding: 8px;
-	background-color: var(--color-gold);
+	background-color: var(--color-yellow);
 	color: var(--color-badge);
 	font-size: 12px;
 	font-weight: bold;
@@ -222,7 +226,7 @@ p {
 	width: 16px;
 	height: 16px;
 	margin: 0;
-	fill: var(--color-gold);
+	fill: var(--color-yellow);
 	vertical-align: middle;
 }
 
@@ -261,4 +265,12 @@ p {
 	text-align: center;
 	font-size: 16px;
 	color: var(--color-black);
+}
+
+.no-items-message {
+	display: none;
+	text-align: center;
+	font-size: 16px;
+	color: var(--color-black);
+	margin-bottom: 40px;
 }

@@ -94,3 +94,28 @@ const createStarIcon = isFilled => {
       <path d="M34.5 29.4l5.9 18.1L25 36.3 9.6 47.5l5.9-18.1L0 18.1h19.1L25 0l5.9 18.1H50z"/>
     </svg>`;
 };
+
+//Event delegation for remove button
+document.getElementById('theme-list').addEventListener('click', event => {
+	const element = event.target.closest('.theme-list__btn-remove');
+	if (element) {
+		removeItem(element);
+	}
+});
+
+const removeItem = element => {
+	const item = element.closest('.theme-list__item');
+	console.log('Removing item:', item);
+	item.remove();
+	checkNoItemToRemove();
+};
+
+const checkNoItemToRemove = () => {
+	const itemList = document.getElementById('theme-list');
+	const noItemsMessage = document.getElementById('no-items-message');
+	if (itemList.children.length === 0) {
+		noItemsMessage.style.display = 'block';
+	} else {
+		noItemsMessage.style.display = 'none';
+	}
+};
